@@ -11,7 +11,6 @@ public class EmployeeClient {
     public Response getAllEmployees(){
         return RestAssured
                 .given()
-                .contentType(ContentType.JSON)
                 .when().log().all()
                 .get(Configuration.EMPLOYEE_GET_ALL)
                 .thenReturn();
@@ -20,13 +19,12 @@ public class EmployeeClient {
     public Response getEmployee(String id){
         return RestAssured
                 .given()
-                .contentType(ContentType.JSON)
                 .when().log().all()
                 .get(Configuration.EMPLOYEE_GET_BY_ID + "/" + id)
                 .thenReturn();
     }
 
-    public Response putEmployee(EmployeeRequestModelPOSTPUT request,String id){
+    public Response updateEmployee(EmployeeRequestModelPOSTPUT request, String id){
         return RestAssured.given()
                 .contentType(ContentType.JSON)
                 .when().log().all()
@@ -43,9 +41,9 @@ public class EmployeeClient {
                 .post(Configuration.EMPLOYEE_POST)
                 .thenReturn();
     }
+
     public Response deleteEmployee(String id){
         return RestAssured.given()
-                .contentType(ContentType.JSON)
                 .when().log().all()
                 .delete(Configuration.EMPLOYEE_DELETE + "/" + id)
                 .thenReturn();

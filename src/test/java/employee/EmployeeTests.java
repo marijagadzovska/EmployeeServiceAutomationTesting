@@ -18,7 +18,6 @@ public class EmployeeTests {
 
     @Test
     public void getAllEmployeesTest(){
-
         Response getResponse = new EmployeeClient()
                 .getAllEmployees();
 
@@ -36,18 +35,18 @@ public class EmployeeTests {
     public void updateEmployeeTest(){
         EmployeeRequestModelPOSTPUT requestBody = new EmployeeDataFactory(createBodyForEmployeesPost())
                 .setAge("30")
-                .setName("Petko")
+                .setName("Emily")
                 .setSalary("10 000")
                 .createRequest();
 
         Response postResponse = new EmployeeClient()
-                . putEmployee(requestBody,"5");
+                .updateEmployee(requestBody,"6");
 
         EmployeeResponseModelPOSTPUT employeesResponse = postResponse.body().as(EmployeeResponseModelPOSTPUT.class);
 
         assertEquals(200, postResponse.statusCode());
         assertEquals("success",employeesResponse.getStatus());
-        assertEquals("Petko",employeesResponse.getData().getName());
+        assertEquals("Emily",employeesResponse.getData().getName());
         assertEquals("30",employeesResponse.getData().getAge());
         assertEquals("10 000",employeesResponse.getData().getSalary());
         assertEquals("Successfully! Record has been updated.",employeesResponse.getMessage());
@@ -55,7 +54,6 @@ public class EmployeeTests {
 
     @Test
     public void getEmployeeByIdTest(){
-
         Response getResponse = new EmployeeClient()
                 .getEmployee("5");
 
@@ -106,9 +104,9 @@ public class EmployeeTests {
     @Test
     public void employeeRequestTest(){
         EmployeeRequestModelPOSTPUT requestBody = new EmployeeDataFactory(createBodyForEmployeesPost())
-                .setAge("30")
-                .setName("Petko")
-                .setSalary("10 000")
+                .setAge("40")
+                .setName("John")
+                .setSalary("20 000")
                 .createRequest();
 
         Response postResponse = new EmployeeClient()
@@ -118,9 +116,9 @@ public class EmployeeTests {
 
         assertEquals(200, postResponse.statusCode());
         assertEquals("success",employeesResponse.getStatus());
-        assertEquals("Petko",employeesResponse.getData().getName());
-        assertEquals("30",employeesResponse.getData().getAge());
-        assertEquals("10 000",employeesResponse.getData().getSalary());
+        assertEquals("John",employeesResponse.getData().getName());
+        assertEquals("40",employeesResponse.getData().getAge());
+        assertEquals("20 000",employeesResponse.getData().getSalary());
         assertEquals("Successfully! Record has been added.",employeesResponse.getMessage());
     }
 }
